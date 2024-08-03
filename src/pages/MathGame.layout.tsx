@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import { Input, Button, Collapse, Typography, Row, Col } from "antd";
 import { BulbTwoTone, ScheduleTwoTone, UnlockTwoTone } from "@ant-design/icons";
 
-const factorial = (n: number): number => {
-  return n <= 1 ? 1 : n * factorial(n - 1);
-};
-
 const findSumAndProducts = (number: number): number[] => {
   let sum = 0;
   let product = 1;
@@ -19,52 +15,47 @@ const findSumAndProducts = (number: number): number[] => {
 };
 
 const generateHints = (number: number): string[] => {
-  const hints = [];
-
-  number % 2 !== 0
-    ? hints.push("It is an odd number")
-    : hints.push("It is an even number");
-
   const [sum, product] = findSumAndProducts(number);
-  hints.push(`The sum of the digits is ${sum}`);
-  hints.push(`The product of the digits is ${product}`);
-  hints.push(`It is a ${number.toString().length} digit number`);
-
-  return hints;
+  const isEven = number % 2 === 0;
+  return [
+    `It is an ${isEven ? "even" : "odd"} number`,
+    `The sum of the digits is ${sum}`,
+    `The product of the digits is ${product}`,
+    `It is a ${number.toString().length}-digit number`,
+  ];
 };
 
-const targetNumber = Math.floor(Math.random() * (500 - 0 + 1)) + 0;
-const hints = generateHints(targetNumber);
+function generateTargetNumber() {
+  return Math.floor(Math.random() * (500 - 1 + 1)) + 1;
+}
 
 export const MathGame = () => {
   const [guess, setGuess] = useState("");
   const [feedback, setFeedback] = useState("");
   const [attempts, setAttempts] = useState(0);
+  const [targetNumber, setTargetNumber] = useState(generateTargetNumber());
+  const [hints, setHints] = useState(generateHints(targetNumber));
 
   const handleGuess = () => {
     const numGuess = parseInt(guess);
-    setAttempts(attempts + 1);
+    setAttempts((prev) => prev + 1);
 
-    const difference = numGuess - targetNumber;
-    switch (true) {
-      case numGuess === targetNumber:
-        setFeedback(`Correct! You guessed it in ${attempts + 1} attempts.`);
-        break;
-      case difference > 0 && difference < 25:
-        setFeedback("High!");
-        break;
-      case difference >= 25:
-        setFeedback("Too high!");
-        break;
-      case difference < 0 && difference > -25:
-        setFeedback("Low!");
-        break;
-      case difference <= -25:
-        setFeedback("Too Low!");
-        break;
-      default:
-        setFeedback("Invalid Guess");
+    if (numGuess === targetNumber) {
+      setFeedback(`Correct! You guessed it in ${attempts + 1} attempts.`);
+    } else if (numGuess > targetNumber) {
+      setFeedback(numGuess - targetNumber < 25 ? "High!" : "Too high!");
+    } else {
+      setFeedback(targetNumber - numGuess < 25 ? "Low!" : "Too Low!");
     }
+  };
+
+  const handleReset = () => {
+    const newTargetNumber = generateTargetNumber();
+    setTargetNumber(newTargetNumber);
+    setHints(generateHints(newTargetNumber));
+    setGuess("");
+    setFeedback("");
+    setAttempts(0);
   };
 
   return (
@@ -84,13 +75,16 @@ export const MathGame = () => {
                 disabled={feedback.includes("Correct")}
               />
             </Col>
-            <Col span={24}>
+            <Col span={12}>
               <Button
                 onClick={handleGuess}
                 disabled={feedback.includes("Correct")}
               >
                 Guess
               </Button>
+            </Col>
+            <Col span={12}>
+              {attempts > 3 && <Button onClick={handleReset}>Reset</Button>}
             </Col>
           </Row>
         </Col>
