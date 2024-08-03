@@ -84,7 +84,7 @@ export const MathGame = () => {
               </Button>
             </Col>
             <Col span={12}>
-              {attempts > 3 && <Button onClick={handleReset}>Reset</Button>}
+              <Button onClick={handleReset}>Reset</Button>
             </Col>
           </Row>
         </Col>
