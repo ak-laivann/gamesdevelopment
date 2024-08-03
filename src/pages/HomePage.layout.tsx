@@ -14,12 +14,12 @@ import { useNavigate } from "react-router-dom";
 
 const iconSize = { fontSize: "30px" };
 const flipKeyframes = `
-    @keyframes flip {
-      0% { transform: rotateY(0deg); }
-      50% { transform: rotateY(180deg); }
-      100% { transform: rotateY(360deg); }
-    }
-  `;
+  @keyframes flip {
+    0% { transform: rotateY(0deg); }
+    50% { transform: rotateY(180deg); }
+    100% { transform: rotateY(360deg); }
+  }
+`;
 
 const coinFlipStyle = {
   fontSize: "30px",
