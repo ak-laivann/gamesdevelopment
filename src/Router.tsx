@@ -1,6 +1,9 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { MathGame } from "./pages/MathGame.layout";
-import { ReactionTimeTestingPage } from "./pages/ReactionTimeTester.layout";
+import {
+  MathGame,
+  ReactionTimeTestingPage,
+  RockPaperScissorPage,
+} from "./pages";
 
 export const RootRouter = () => {
   return (
@@ -8,6 +11,7 @@ export const RootRouter = () => {
       <Route index element={<Navigate to={"maths"} />} />
       <Route path="maths" element={<MathGame />} />
       <Route path="reaction" element={<ReactionTimeTestingPage />} />
+      <Route path="rps" element={<RockPaperScissorPage />} />
     </Routes>
   );
 };

@@ -1,4 +1,4 @@
-import { HomePage } from "../pages/HomePage.layout";
+import { HomePage } from "../pages";
 import { HomeContainer } from "./HomeContainer";
 import { Navigate, Route, Routes } from "react-router-dom";
 
