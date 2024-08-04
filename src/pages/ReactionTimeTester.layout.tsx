@@ -65,7 +65,7 @@ export const ReactionTimeTestingPage: React.FC = () => {
         </Typography.Title>
       </div>
       <div style={{ marginLeft: "5%", marginRight: "5%" }}>
-        <Typography.Text keyboard>
+        <Typography.Text keyboard style={{ color: "white" }}>
           Click Start to start the timer. The timer starts only after 3 seconds.
           The light turns red after pressing Start, hover above the Stop Button
           waiting for the timer to start and the light to turn green. Once the
@@ -87,6 +87,7 @@ export const ReactionTimeTestingPage: React.FC = () => {
       <Row gutter={[24, 24]} style={{ marginLeft: "15%" }}>
         <Col span={8}>
           <Button
+            type="primary"
             disabled={isActive}
             size="large"
             onClick={handleStart}
@@ -95,6 +96,7 @@ export const ReactionTimeTestingPage: React.FC = () => {
         </Col>
         <Col span={8}>
           <Button
+            type="primary"
             disabled={!isActive || isStopped}
             size="large"
             onClick={handleStop}
@@ -102,7 +104,12 @@ export const ReactionTimeTestingPage: React.FC = () => {
           />
         </Col>
         <Col span={8}>
-          <Button size="large" onClick={handleReset} children="Reset" />
+          <Button
+            type="primary"
+            size="large"
+            onClick={handleReset}
+            children="Reset"
+          />
         </Col>
       </Row>
     </>

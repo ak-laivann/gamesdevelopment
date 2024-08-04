@@ -60,8 +60,18 @@ export const MathGame = () => {
 
   return (
     <>
-      <h1>Number Guessing Game</h1>
-      <p>Guess the number between 1 and 500</p>
+      <div
+        style={{ color: "white", display: "flex", justifyContent: "center" }}
+      >
+        <Row gutter={[0, 0]}>
+          <Col span={24} push={4}>
+            <h1>Number Guessing Game</h1>
+          </Col>
+          <Col span={24} push={6}>
+            <h4>Guess the number between 1 and 500</h4>
+          </Col>
+        </Row>
+      </div>
       <Row gutter={[24, 24]}>
         <Col span={10}>
           <Row gutter={[24, 24]}>
