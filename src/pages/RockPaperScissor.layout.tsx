@@ -7,9 +7,21 @@ import {
 } from "@ant-design/icons";
 
 const choices = [
-  { key: "ROCK", value: "Rock", icon: <SettingTwoTone /> },
-  { key: "SCISSOR", value: "Scissor", icon: <PushpinTwoTone /> },
-  { key: "PAPER", value: "Paper", icon: <FileTextTwoTone /> },
+  {
+    key: "ROCK",
+    value: "Rock",
+    icon: <SettingTwoTone twoToneColor={"#000000"} />,
+  },
+  {
+    key: "SCISSOR",
+    value: "Scissor",
+    icon: <PushpinTwoTone twoToneColor={"#FF4500"} />,
+  },
+  {
+    key: "PAPER",
+    value: "Paper",
+    icon: <FileTextTwoTone twoToneColor={"#1E90FF"} />,
+  },
 ];
 
 function generateComputerChoice() {
@@ -123,7 +135,13 @@ export const RockPaperScissorPage = () => {
           return (
             <Col span={8} push={2}>
               <Button
-                type="primary"
+                type={
+                  i.key === "ROCK"
+                    ? "dashed"
+                    : i.key === "SCISSOR"
+                    ? "primary"
+                    : "default"
+                }
                 size="large"
                 children={i.value}
                 onClick={() => setUserChoice(i.key)}
